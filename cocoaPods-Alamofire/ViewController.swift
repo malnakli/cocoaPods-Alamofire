@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let searchPar = "a"
+        Alamofire.request(.GET, "https://momo2015-2.myshopify.com/search?q=*w*&view=json").responseJSON() {
+            (_, _, data, _) in
+            println(data)
+        }
     }
 
     override func didReceiveMemoryWarning() {
