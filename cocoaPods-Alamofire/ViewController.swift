@@ -8,16 +8,26 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let searchPar = "a"
-        Alamofire.request(.GET, "https://momo2015-2.myshopify.com/search?q=*w*&view=json").responseJSON() {
+        let searchBar = "b"
+        let url = "https://momo2015-2.myshopify.com/search?q=*\(searchBar)*&type=product&view=json"
+        Alamofire.request(.GET, url).responseJSON() {
             (_, _, data, _) in
-            println(data)
+            
+            if let json: AnyObject = data{
+                let product = JSON(json)
+                for (key: String, obj: JSON) in product {
+                     println(obj["title"])
+                }
+               
+
+            }
         }
     }
 
